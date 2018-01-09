@@ -7,9 +7,11 @@ Tasks main
 ******************************************************************************************/
 
 require("./expenses-controller.js");
+require("./currency-service.js");
 
 var app = angular.module("expenses.controllers", [
-	"expenses.controller"
+	"expenses.controller",
+  "currency.rate"
 ]);
 
 app.config(["$routeProvider", function($routeProvider) {

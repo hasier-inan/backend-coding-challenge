@@ -13,7 +13,8 @@
 			</li>
 			<li>
 				<label>Amount</label>
-				<input type="text" ng-required="true" ng-model="newExpense.amount" placeholder="00.00" />
+				<input type="text" ng-required="true" ng-model="newExpense.amount" name="newExpenseAmount" ng-pattern="/^[0-9]+(\.[0-9]+)?(\s?EUR)?$/" placeholder="00.00" />
+                <label class="alert" ng-show="expensesform.newExpenseAmount.$error.pattern">Amount format is invalid.</label>
 			</li>
 			<li>
 				<label>Reason</label>
@@ -21,7 +22,7 @@
 			</li>
 			<li>
 				<label></label>
-				<button ng-click="saveExpense()" class="solid">Save Expense</button> <button ng-click="clearExpense()">cancel</button>
+				<button ng-click="saveExpense()" ng-disabled="expensesform.newExpenseAmount.$error.pattern" class="solid">Save Expense</button> <button ng-click="clearExpense()">cancel</button>
 			</li>
 		</ul>
 	</form>
