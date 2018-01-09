@@ -7,6 +7,8 @@ import java.io.IOException;
 
 /**
  * Created by hasiermetal on 09/01/2018.
+ * A utility to obtain corresponding json value given a pojo object. This will be used to simulate a json request
+ * in the same way it comes from the front-end.
  */
 public class JsonMapper {
 

@@ -1,7 +1,7 @@
 package com.engage.controllers;
 
 import com.engage.model.Expense;
-import com.engage.services.DefaultExpenseService;
+import com.engage.services.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * Created by hasiermetal on 08/01/2018.
+ * Main controller to manage expenses in the application. Uses the expense service to retrieve and create new expenses.
+ */
 @Controller
 @RequestMapping("/app/expenses")
 public class ExpensesController {
 
     @Autowired
-    DefaultExpenseService defaultExpenseService;
+    ExpenseService defaultExpenseService;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
@@ -27,8 +31,7 @@ public class ExpensesController {
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Expense persistExpense(@RequestBody Expense expense) {
-        Expense save = this.defaultExpenseService.save(expense);
-        return save;
+        return this.defaultExpenseService.save(expense);
     }
 
 }

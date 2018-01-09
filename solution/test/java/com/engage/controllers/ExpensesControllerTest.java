@@ -33,8 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Created by hasiermetal on 08/01/2018.
+ * Verifies the controller endpoint mappings are correctly defined.
+ * Mocks the DAO to avoid writing to the database, but checks whether the expense has been called to be saved/retrieved.
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc

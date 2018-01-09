@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by hasiermetal on 09/01/2018.
+ * Default implementation of the ExpenseService to retrieve and create new Expenses.
  */
 @Service
 public class DefaultExpenseService implements ExpenseService {

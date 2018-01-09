@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by hasiermetal on 09/01/2018.
+ * This builder can help to mock Expense objects for testing purposes.
  */
 public class ExpenseBuilder {
 

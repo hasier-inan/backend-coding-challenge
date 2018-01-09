@@ -12,6 +12,7 @@ import java.util.Date;
 
 /**
  * Created by hasiermetal on 08/01/2018.
+ * Includes data for the expense reason, date and amount.
  */
 @Entity
 public class Expense implements Serializable {
