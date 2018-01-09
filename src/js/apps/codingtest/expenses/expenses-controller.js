@@ -26,6 +26,8 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
 		dateFormat: "dd/mm/yy"
 	};
 
+	$scope.vatCalculation = {};
+
 	var loadExpenses = function() {
 		// Retrieve a list of expenses via REST
 		restExpenses.get().then(function(expenses) {
@@ -43,8 +45,13 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
     }
   };
 
+  $scope.calculateVAT = function() {
+    $scope.vatCalculation = $currencyRate.calculateAmountInGbp($scope.newExpense.amount) * 0.2;
+  };
+
 	$scope.clearExpense = function() {
 		$scope.newExpense = {};
+    $scope.vatCalculation = {};
 	};
 
 	$scope.updatedAmountExpense = function() {

@@ -23,7 +23,7 @@ app.service("currencyRate", ["$http", "$timeout", function($http, $timeout) {
   };
 
   currencyClient.calculateAmountInGbp = function(rawAmount) {
-    return (rawAmount.indexOf("EUR") >= 0) ? Number(rawAmount.replace("EUR", "")) * gbpRate : rawAmount;
+    return (rawAmount && rawAmount.indexOf("EUR") >= 0) ? Number(rawAmount.replace("EUR", "")) * gbpRate : rawAmount;
   };
 
   return currencyClient;
