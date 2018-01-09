@@ -3,10 +3,11 @@ README
 Welcome to the backend coding challenge solution! You can clone this project with the following command:
 
 ```
-git clone https://github.com/hasier-inan/engage-poc
+git clone https://github.com/hasier-inan/backend-coding-challenge
 ```
 
-###Setup
+
+### Setup
 
 
 In order to run the application locally you will need to setup your environment first.
@@ -20,26 +21,20 @@ You can download and install java directly from the [official web page](https://
 You need to install MySQL and have it running in your machine if you want to launch the application locally.
  You can verify the instance is running with the `mysql.server status` command (you can start/restart the server with `mysql.server start` and `mysql.server restart`, respectively).
 
-The configuration details are defined in the `solution/resources/application.properties` file. You can amend that file with your own database url/port and credentials. The _Expenses_ table will be created from the model, if you don't want to destroy and recreate the same table every time the application is restarted, you can change the `spring.jpa.hibernate.ddl-auto` property. 
+The configuration details are defined in the `solution/resources/application.properties` file. You can amend that file with your own database url/port and credentials. The _Expenses_ table will be created from the model, if you don't want to destroy and recreate the same table every time the application is restarted, you can change the `spring.jpa.hibernate.ddl-auto` property (uncomment it first if you want to create the table automatically). 
 
 **Maven (Optional)**
 
 If you want to run the project directly from the source code you will need to [install Maven first](https://maven.apache.org/install.html) and include the binary folder in the $PATH.
 
 
-###Running the application
+### Running the application
 
-You can run the application from the command line or from an IDE. In any case, once executed it will be listening, by default, at `localhost:8080/`
+You can run the application from the command line or from an IDE. In any case, once executed, it will be listening by default at `localhost:8080/`
 
  **1. Command line**
  
- You can run the application directly using the jar file provided in the project (`dist/backend-coding-challenge-1.0.0.jar `). The backend side has been built using _Spring Boot_ and it has embedded HTTP server in it.
- 
- ```
- java -jar ./dist/backend-coding-challenge-1.0.0.jar
- ```
- 
- If interested, you can build the jar from the source code , run `mvn package` and it will build the jar in the `target` folder (you will need to setup Maven first). Remember that you'll need to install all required dependencies as well as compile the front-end code:    
+ You can build the jar from the source code, run `mvn package` and it will build the jar in the `target` folder (you will need to setup Maven first). Remember that you'll need to install all required dependencies as well as compile the front-end code:    
  
  ```
  mvn clean install
