@@ -37,7 +37,7 @@
 		<div ng-repeat="expense in expenses" class="body-row">
 			<div class="col-4">{{expense.date | date:'dd MMM yyyy'}}</div>
 			<div class="col-4 figures">{{expense.amount | currency:"&pound;"}}</div>
-			<div class="col-2 figures">{{expense.vat | currency:"&pound;"}}</div>
+			<div class="col-2 figures">{{expense.amount * .2 | currency:"&pound;"}}</div>
 			<div class="col-15">{{expense.reason}}</div>
 		</div>
 	</div>
