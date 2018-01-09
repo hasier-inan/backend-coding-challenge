@@ -1,7 +1,7 @@
 package com.engage.controllers;
 
 import com.engage.model.Expense;
-import com.engage.repository.ExpensesRepository;
+import com.engage.services.DefaultExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,20 +16,19 @@ import java.util.List;
 public class ExpensesController {
 
     @Autowired
-    ExpensesRepository expensesRepository;
+    DefaultExpenseService defaultExpenseService;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    String retrieveExpenses() {
-        List<Expense> expenses = (List<Expense>) this.expensesRepository.findAll();
-        return "{}";
+    List<Expense> retrieveExpenses() {
+        return this.defaultExpenseService.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    String persistExpense(@RequestBody Expense expense) {
-        Expense persistedExpense = this.expensesRepository.save(expense);
-        return "{}";
+    Expense persistExpense(@RequestBody Expense expense) {
+        Expense save = this.defaultExpenseService.save(expense);
+        return save;
     }
 
 }

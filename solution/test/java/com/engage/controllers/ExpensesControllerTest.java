@@ -18,7 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.engage.utils.JsonMapper.getJsonFromMap;
 import static org.hamcrest.CoreMatchers.is;
@@ -47,34 +49,42 @@ public class ExpensesControllerTest {
     private ExpensesRepository expensesRepository;
 
     @Test
-    public void retrieveExpenses() throws Exception {
-        when(this.expensesRepository.findAll()).thenReturn(null);
+    public void testExpensesAreRetrieved() throws Exception {
+        Long sampleExpenseId = 123456789L;
+        when(this.expensesRepository.findAll()).thenReturn(createMultipleExpenses(sampleExpenseId));
         mockMvc.perform(get(expensesUrl))
-                .andExpect(content().string(containsString("{}")));
+                .andExpect(content().string(containsString(sampleExpenseId.toString())));
         verify(this.expensesRepository, times(1)).findAll();
     }
 
     @Test
-    public void persistExpense() throws Exception {
+    public void testExpensesArePersisted() throws Exception {
+        Long sampleExpenseId = 987654321L;
         ArgumentCaptor<Expense> expenseArgumentCaptor = ArgumentCaptor.forClass(Expense.class);
-        when(this.expensesRepository.save(any(Expense.class))).thenReturn(null);
+        when(this.expensesRepository.save(any(Expense.class))).thenReturn(createExpenseSample(sampleExpenseId));
 
         mockMvc.perform(post(expensesUrl)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(createExpenseRequest()))
-                .andExpect(content().string(containsString("{}")));
+                .content(createExpenseRequest(sampleExpenseId)))
+                .andExpect(content().string(containsString(sampleExpenseId.toString())));
 
         verify(this.expensesRepository, times(1)).save(expenseArgumentCaptor.capture());
-        assertThat("Expected expense to have been persisted", expenseArgumentCaptor.getValue().getId(), is(12L));
+        assertThat("Expected expense to have been persisted", expenseArgumentCaptor.getValue().getId(), is(sampleExpenseId));
     }
 
-    private String createExpenseRequest() throws IOException {
-        return getJsonFromMap(createExpenseSample());
+    private String createExpenseRequest(Long sampleId) throws IOException {
+        return getJsonFromMap(createExpenseSample(sampleId));
     }
 
-    private Expense createExpenseSample() {
+    private List<Expense> createMultipleExpenses(Long id) {
+        List<Expense> expenses = new ArrayList<>();
+        expenses.add(createExpenseSample(id));
+        return expenses;
+    }
+
+    private Expense createExpenseSample(Long id) {
         return ExpenseBuilder.anExpense()
-                .withId(12L)
+                .withId(id)
                 .withAmount(new BigDecimal(66.6).setScale(2, RoundingMode.CEILING))
                 .withDate(new Date())
                 .withReason("Something pretty")
